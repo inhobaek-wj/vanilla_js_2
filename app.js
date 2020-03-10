@@ -4,9 +4,11 @@ canvas.height = 700;
 
 // context makes us to manipulate pixels inside the canvas.
 const ctx = canvas.getContext("2d");
-
 ctx.strokeStyle = "#2c2c2c";
 ctx.lineWidth = 2.5;
+
+const colors = document.getElementsByClassName("controls-color");
+Array.from(colors).forEach(color => color.addEventListener("click", changeColor));
 
 let painting = false;
 
@@ -36,4 +38,9 @@ if (canvas) {
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
+}
+
+function changeColor(event) {
+  const color = event.target.style.backgroundColor;
+  ctx.strokeStyle = color;
 }
