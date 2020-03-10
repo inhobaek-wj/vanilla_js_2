@@ -2,6 +2,7 @@ const canvas = document.getElementById("js-canvas");
 const colors = document.getElementsByClassName("controls-color");
 const range = document.getElementById("js-range");
 const mode = document.getElementById("js-fill");
+const save = document.getElementById("js-save");
 
 canvas.width = 700;
 canvas.height = 700;
@@ -18,10 +19,15 @@ if (canvas) {
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
   canvas.addEventListener("click", handleCanvasClick);
+  canvas.addEventListener("contextmenu", handleCanvasCM);
 }
 
 if (mode) {
   mode.addEventListener("click", handleFillClick);
+}
+
+if (save) {
+  save.addEventListener("click", handleSaveClick);
 }
 
 // context makes us to manipulate pixels inside the canvas.
@@ -82,6 +88,18 @@ function handleCanvasClick(event) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 };
+
+function handleCanvasCM(event) {
+  event.preventDefault();
+}
+
+function handleSaveClick(event) {
+  const image = canvas.toDataURL("image/png");
+  const link = document.createElement("a");
+  link.href = image;
+  link.download = "PaintJS";
+  link.click();
+}
 
 function init() {
   ctx.fillStyle = "white";
