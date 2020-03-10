@@ -21,7 +21,7 @@ if (canvas) {
 }
 
 if (mode) {
-  range.addEventListener("click", handleFillClick);
+  mode.addEventListener("click", handleFillClick);
 }
 
 // context makes us to manipulate pixels inside the canvas.
@@ -62,12 +62,12 @@ function handleColorClick(event) {
 
 }
 
-const handleRangeChange = (event) => {
+function handleRangeChange(event) {
   const size = event.target.value;
   ctx.lineWidth = size;
 };
 
-const handleFillClick = (event) => {
+function handleFillClick(event) {
   if (filling) {
     filling = false;
     mode.innerText = "Fill";
@@ -77,8 +77,15 @@ const handleFillClick = (event) => {
   }
 };
 
-const handleCanvasClick = (event) => {
+function handleCanvasClick(event) {
   if (filling) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 };
+
+function init() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+init();
